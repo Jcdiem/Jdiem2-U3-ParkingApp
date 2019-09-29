@@ -23,11 +23,7 @@ public class Main {
                     break;
                 case("2"):
                     garageClosed = true;
-                    System.out.println("Best value parking garage");
-                    System.out.println("=========================");
-                    System.out.println("    Activity to date     ");
-                    System.out.println();
-                    System.out.println("ACTIVITY HERE");
+                    garage.toDateInfo();
                     break;
                 default:
                     //Error catching for when user is big dumb

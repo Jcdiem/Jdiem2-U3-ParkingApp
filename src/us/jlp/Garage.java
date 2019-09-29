@@ -3,7 +3,11 @@ package us.jlp;
 //Helper class to keep text outputs out of the way
 public class Garage {
     public Garage (){
-
+        System.out.println("Best value parking garage");
+        System.out.println("=========================");
+        System.out.println("    Activity to date     ");
+        System.out.println();
+        System.out.println("ACTIVITY HERE");
     }
     //Print parking screen
     public void inCustomer(){
@@ -21,6 +25,10 @@ public class Garage {
     }
     //Print toDate output
     public void toDateInfo(){
-
+        System.out.println("Best value parking garage");
+        System.out.println("=========================");
+        System.out.println("    Activity to date     ");
+        System.out.println();
+        System.out.println("ACTIVITY HERE");
     }
 }
