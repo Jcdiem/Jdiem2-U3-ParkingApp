@@ -8,44 +8,53 @@ public class Main {
     public static void main(String[] args) {
         Garage garage = new Garage();
         boolean garageClosed = false;
+        boolean error = false;
         Scanner keyboard = new Scanner(System.in);
         String input;
+        int cID = 0;
+        CarTicket curTicket = null;
 
         while (!garageClosed){
+            error = false;
+            //Clear space to make prettier
+            System.out.println();
+            System.out.println();
+            System.out.println();
             //Inny
             garage.inCustomer();
-            input = keyboard.next();
+            input = keyboard.next().trim();
             switch(input){
                 case("1"):
-                    //Create a ticket
+                    curTicket = new CarTicket(cID++, garage.getTime());
                     break;
                 case("2"):
                     garageClosed = true;
                     garage.toDateInfo();
                     break;
                 default:
-                    //Error catching for when user is big dumb
+                    System.out.println("Error please try again");
+                    error = true;
                     break;
-
             }
 
 
             //Outty
-            garage.outCustomer();
-            input = keyboard.next();
-            switch(input){
-                case("1"):
-                    //Tally up the total
-                    break;
-                case("2"):
-                    //Inact Lost ticket fee
-                    break;
-                default:
-                    //Repeat list with notification of error
-                    break;
+            if(!garageClosed && !error){
+                garage.outCustomer();
+                input = keyboard.next().trim();
+                switch (input) {
+                    case ("1"):
+                        garage.processTicket(curTicket);
+                        break;
+                    case ("2"):
+                        garage.lostTicketCustomer(curTicket);
+                        break;
+                    default:
+                        //Assume customer lost ticket
+                        garage.lostTicketCustomer(curTicket);
+                        break;
+                }
             }
-
-
         }
     }
 }
