@@ -1,23 +1,19 @@
 package us.jlp;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class Main {
 //TODO: Make sure to parse for minor user mistakes that can be interp.
 
     public static void main(String[] args) {
+        Garage garage = new Garage();
         boolean garageClosed = false;
         Scanner keyboard = new Scanner(System.in);
         String input;
 
         while (!garageClosed){
-            //TODO: Move the garage outputs to their own functions
             //Inny
-            System.out.println("Best value parking garage");
-            System.out.println("=========================");
-            System.out.println("1 - Check/In");
-            System.out.println("2 - Close garage");
+            garage.inCustomer();
             input = keyboard.next();
             switch(input){
                 case("1"):
@@ -25,11 +21,7 @@ public class Main {
                     break;
                 case("2"):
                     garageClosed = true;
-                    System.out.println("Best value parking garage");
-                    System.out.println("=========================");
-                    System.out.println("    Activity to date     ");
-                    System.out.println("");
-                    System.out.println("ACTIVITY HERE");
+                    garage.toDateInfo();
                     break;
                 default:
                     //Error catching for when user is big dumb
@@ -39,10 +31,7 @@ public class Main {
 
 
             //Outty
-            System.out.println("Best value parking garage");
-            System.out.println("=========================");
-            System.out.println("1 - Check/Out");
-            System.out.println("2 - Lost Ticket");
+            garage.outCustomer();
             input = keyboard.next();
             switch(input){
                 case("1"):
