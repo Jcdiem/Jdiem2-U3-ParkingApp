@@ -10,6 +10,8 @@ public class Main {
         boolean garageClosed = false;
         Scanner keyboard = new Scanner(System.in);
         String input;
+        int cID = -1;
+        CarTicket curTicket = null;
 
         while (!garageClosed){
             //Inny
@@ -17,35 +19,36 @@ public class Main {
             input = keyboard.next();
             switch(input){
                 case("1"):
-                    //Create a ticket
+                    curTicket = new CarTicket(cID++, garage.getTime());
                     break;
                 case("2"):
                     garageClosed = true;
                     garage.toDateInfo();
                     break;
                 default:
-                    //Error catching for when user is big dumb
+                    System.out.println("Error please try again");
+                    //TODO: Make condition for user being dumb
                     break;
-
             }
 
 
             //Outty
-            garage.outCustomer();
-            input = keyboard.next();
-            switch(input){
-                case("1"):
-                    //Tally up the total
-                    break;
-                case("2"):
-                    //Inact Lost ticket fee
-                    break;
-                default:
-                    //Repeat list with notification of error
-                    break;
+            if(!garageClosed){
+                garage.outCustomer();
+                input = keyboard.next();
+                switch (input) {
+                    case ("1"):
+                        garage.processTicket(curTicket);
+                        break;
+                    case ("2"):
+                        garage.lostTicketCustomer();
+                        break;
+                    default:
+                        //Assume customer lost ticket
+                        garage.lostTicketCustomer();
+                        break;
+                }
             }
-
-
         }
     }
 }

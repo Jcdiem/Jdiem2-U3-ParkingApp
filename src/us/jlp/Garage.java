@@ -16,14 +16,8 @@ public class Garage {
     int cashEarned = 0;
     int checkIns = 0;
     int ticketsLost = 0;
+    int cashTime = 0;
 
-    public Garage (){
-        System.out.println("Best value parking garage");
-        System.out.println("=========================");
-        System.out.println("    Activity to date     ");
-        System.out.println();
-        System.out.println("ACTIVITY HERE");
-    }
     //Print parking screen
     public void inCustomer(){
         System.out.println("Best value parking garage");
@@ -38,8 +32,16 @@ public class Garage {
         System.out.println("1 - Check/Out");
         System.out.println("2 - Lost Ticket");
     }
+    //Print lost ticket screen
+    public void lostTicketCustomer(){
+        System.out.println("Best value parking garage");
+        System.out.println("=========================");
+        System.out.println("Receipt for vehicle id "+"NUMBER"); //TODO: work ticket/vehicle Id into all of the outputs
+        ticketsLost++;
+    }
     //Print toDate output
     public void toDateInfo(){
+        cashEarned += ticketsLost*LOSTCOST;
         System.out.println("Best value parking garage");
         System.out.println("=========================");
         System.out.println("    Activity to date     ");
@@ -79,7 +81,8 @@ public class Garage {
     public int processTicket(CarTicket ticket){
         LocalTime inTime = ticket.getTime();
         LocalTime outTime = LocalTime.now();
-        return 0;
+        return inTime.compareTo(outTime);
+        //return 0;
         //TODO: return the cost to be paid
     }
 }
