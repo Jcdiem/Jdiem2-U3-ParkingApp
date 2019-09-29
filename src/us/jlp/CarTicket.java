@@ -14,4 +14,7 @@ public class CarTicket {
     public LocalTime getTime(){
         return entryTime;
     }
+    public int getIdNum(){
+        return idNum;
+    }
 }

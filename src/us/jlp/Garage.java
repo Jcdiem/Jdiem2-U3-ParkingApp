@@ -47,7 +47,7 @@ public class Garage {
         System.out.println("    Activity to date     ");
         System.out.println();
         //TODO:Add cost with collected checkins
-        System.out.println("$XXX"+" was collected from "+checkIns+" Check Ins");
+        System.out.println(cashTime+" was collected from "+checkIns+" Check Ins");
         System.out.println("$"+ticketsLost*LOSTCOST+" was collected from "+ticketsLost+" Lost Tickets");
         System.out.println();
         System.out.println("$"+cashEarned+" was collected overall");
@@ -70,18 +70,41 @@ public class Garage {
     }
 
     public LocalTime getTime(){
-        int h = ThreadLocalRandom.current().nextInt(0,23); //Everyone has to be parked by 10 and out by 11:59
+        int h = ThreadLocalRandom.current().nextInt(0,23); //Everyone has to be parked by 10 and out by 11
         int m = ThreadLocalRandom.current().nextInt(0,60);
         if (m >= 30 && h != 23){
             h++;
         }
+        System.out.println(h);
         return LocalTime.of(h,0,0); //Going off of hour rounded to nearest minute
     }
 
-    public int processTicket(CarTicket ticket){
+    public void processTicket(CarTicket ticket){
         LocalTime inTime = ticket.getTime();
-        LocalTime outTime = LocalTime.now();
-        return inTime.compareTo(outTime);
+        LocalTime outTime = LocalTime.of(23,0); //For testing purposes, all vehicles leave at 11
+        //LocalTime outTime = LocalTime.now();
+        String sOutput;
+        String outTimeHS;
+        String inTimeHS;
+        int difference = outTime.getHour() - inTime.getHour();
+        int inTimeH = inTime.getHour(); if (inTimeH > 12){ //check if it is pm
+            inTimeH -= 12;
+            inTimeHS = inTimeH+"pm";
+        }
+        else inTimeHS = Integer.toString(inTimeH);
+        int outTimeH = outTime.getHour(); if(outTimeH > 12){ //Check if it is pm
+            outTimeH -= 12;
+            outTimeHS = outTimeH+"pm";
+        }
+        else outTimeHS = Integer.toString(outTimeH);
+        sOutput = inTimeHS+" - "+outTimeHS;
+
+        System.out.println("Best value parking garage");
+        System.out.println("=========================");
+        System.out.println("Receipt for vehicle id "+ticket.getIdNum());
+        System.out.println();
+        System.out.println();
+        System.out.println(difference+" hours parked "+sOutput);
         //return 0;
         //TODO: return the cost to be paid
     }
