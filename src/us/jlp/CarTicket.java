@@ -8,4 +8,8 @@ public class CarTicket {
     public CarTicket(LocalTime timeCreated){
         entryTime = timeCreated;
     }
+
+    public LocalTime getTime(){
+        return entryTime;
+    }
 }

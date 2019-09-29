@@ -1,6 +1,5 @@
 package us.jlp;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +12,6 @@ public class Main {
         String input;
 
         while (!garageClosed){
-            //TODO: Move the garage outputs to their own functions
             //Inny
             garage.inCustomer();
             input = keyboard.next();
