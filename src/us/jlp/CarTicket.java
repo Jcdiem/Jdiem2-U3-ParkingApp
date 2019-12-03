@@ -17,4 +17,7 @@ public class CarTicket {
     public int getIdNum(){
         return idNum;
     }
+    public int getDifference(LocalTime outTime){
+        return outTime.getHour() - entryTime.getHour();
+    }
 }
