@@ -7,7 +7,16 @@ public class OutputManager {
         System.out.println("Best value parking garage");
         System.out.println("=========================");
         System.out.println("1 - Check/In");
-        System.out.println("2 - Close garage");
+        System.out.println("2 - Check/Out");
+        System.out.println("3 - Close garage");
+    }
+    public void inOptions(){
+        System.out.println("Best value parking garage");
+        System.out.println("Check/In");
+        System.out.println("=========================");
+        System.out.println("1 - Ticket");
+        System.out.println("2 - Special Event");
+
     }
     //Print leaving screen
     public void outCustomer(){
@@ -73,7 +82,7 @@ public class OutputManager {
         System.out.println("Special Event");
         System.out.println("$"+cost);
     }
-    public void noTicketCustomer(int lostCost){
+    public void noTicketCustomer(int lostCost){//TODO: Let the user know why they're randomly getting a lost ticket receipt
         System.out.println("Best value parking garage");
         System.out.println("=========================");
         System.out.println("ERROR: No ticket entered");

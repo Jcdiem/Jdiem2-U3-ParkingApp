@@ -22,7 +22,6 @@ public class Main {
         CheckoutStrategy[] checkoutStyleList = new CheckoutStrategy[]{new NormalCheckout(), new LostCheckout(), new EventCheckout()};
 
         while (!garageClosed){
-            curTicket = null;
 
             error = false;
             //Clear space to make prettier
@@ -36,13 +35,29 @@ public class Main {
             input = keyboard.next().trim();
             switch(input){
                 case("1"):
-                    curTicket = new CarTicket(cID++, timeManage.getTime());
+                    outty.inOptions();
+                    input = keyboard.next().trim();
+                    switch(input){
+                        case("1"): //Normal ticket
+                            curTicket = new CarTicket(cID++, timeManage.getTime());
+                            break;
+                        case("2"): //Event ticket
+                            LocalTime simpleTime = timeManage.getTime(); //TODO: tidy up event ticket so that its not throwing times when not needed (SEE OVERUSE OF TIME IN STRATEGY)
+                            curTicket = new CarTicket(cID++,simpleTime);
+                            outty.eventReceipt(curTicket.getIdNum(),checkoutStyleList[parseInt(input)].reportTicket(curTicket,simpleTime));
+                            error = true; //Using to skip leaving screen
+                            break;
+                        default:
+                            System.out.println("ERROR please try again");
+                            error = true;
+                            break;
+                    }
                     break;
                 case("2"):
-                    LocalTime simpleTime = timeManage.getTime(); //TODO: tidy up event ticket so that its not throwing times when not needed (SEE OVERUSE OF TIME IN STRATEGY)
-                    curTicket = new CarTicket(cID++,simpleTime);
-                    outty.eventReceipt(curTicket.getIdNum(),checkoutStyleList[parseInt(input)+1].reportTicket(curTicket,simpleTime));
-                    error = true; //Using to skip leaving screen
+                    LocalTime outTime = LocalTime.of(23,0); //Same deal TODO: Find a better way to setup outTime
+                    //Assume customer lost ticket if they show up without one (Press checkout without making a ticket first)
+                    outty.lostTicketCustomer(curTicket.getIdNum(),checkoutStyleList[1].reportTicket(curTicket,outTime));
+                    error = true; //Reset back to beginning TODO: either rename 'error' or make another boolean
                     break;
                 case("3"):
                     garageClosed = true;
@@ -62,21 +77,16 @@ public class Main {
                 input = keyboard.next().trim();
                 switch (input) {
                     case ("1"): //Submit ticket
-                        outty.normalReceipt(curTicket.getTime().getHour(),outTime.getHour(),curTicket.getIdNum(),checkoutStyleList[parseInt(input)].reportTicket(curTicket,outTime));
+                        outty.normalReceipt(curTicket.getTime().getHour(),outTime.getHour(),curTicket.getIdNum(),checkoutStyleList[parseInt(input)-1].reportTicket(curTicket,outTime));
                         break;
                     case ("2"): //Lost ticket
-                        outty.lostTicketCustomer(curTicket.getIdNum(),checkoutStyleList[parseInt(input)].reportTicket(curTicket,outTime));
+                        outty.lostTicketCustomer(curTicket.getIdNum(),checkoutStyleList[parseInt(input)-1].reportTicket(curTicket,outTime));
                         break;
                     default:
                         //Assume customer lost ticket if they screw up :)
-                        outty.lostTicketCustomer(curTicket.getIdNum(),checkoutStyleList[2].reportTicket(curTicket,outTime)); //TODO: fix the use of number '2'
+                        outty.lostTicketCustomer(curTicket.getIdNum(),checkoutStyleList[1].reportTicket(curTicket,outTime)); //TODO: fix the use of number '1'
                         break;
                 }
-            }
-            else if(!garageClosed && !error && curTicket == null){
-                LocalTime outTime = LocalTime.of(23,0); //Same deal TODO: Find a better way to setup outTime
-                //Assume customer lost ticket if they show up without one (Press checkout without making a ticket first)
-                outty.lostTicketCustomer(curTicket.getIdNum(),checkoutStyleList[2].reportTicket(curTicket,outTime));
             }
         }
     }

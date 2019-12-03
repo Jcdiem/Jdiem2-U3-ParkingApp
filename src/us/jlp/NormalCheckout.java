@@ -8,9 +8,9 @@ public class NormalCheckout implements CheckoutStrategy {
 
     @Override
     public int reportTicket(CarTicket ticket, LocalTime outTime) {
-        garage.addNormalTicket(BASECOST);
         int thisCost = BASECOST;
-        thisCost += ticket.getDifference(outTime);
+        thisCost += (ticket.getDifference(outTime))-1;
+        garage.addNormalTicket(thisCost);
         return(thisCost);
     }
 
