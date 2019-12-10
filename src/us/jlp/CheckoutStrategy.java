@@ -9,13 +9,13 @@ public interface CheckoutStrategy {
      *
      * @param ticket the ticket associated with the vehicle
      * @param outTime the time the vehicle left
-     * @return
+     * @return Returns an int, which is intended to be the cost of the ticket after all additives
      */
-    public int reportTicket(CarTicket ticket, LocalTime outTime); //TODO: Find a workaround for unneeded inputs
+    int reportTicket(CarTicket ticket, LocalTime outTime); //Force all tickets to use OutTime so that it can be documented for later use by garage
 
     /**
      * Returns the base cost of a checkout type
      * @return the base cost of that checkout style
      */
-    public int getBaseCost();
+    int getBaseCost();
 }

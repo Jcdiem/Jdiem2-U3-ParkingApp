@@ -9,6 +9,7 @@ public class Main {
 //TODO: Make sure to parse for minor user mistakes that can be interp.
 
     public static void main(String[] args) {
+        CheckoutFactory checkoutFactory = new CheckoutFactory();
         TimeHelper timeManage = new TimeHelper();
         OutputManager outty = new OutputManager();
         GarageEnum garage = GarageEnum.INSTANCE;
@@ -19,7 +20,7 @@ public class Main {
         String input;
         int cID = 0;
         CarTicket curTicket = null;
-        CheckoutStrategy[] checkoutStyleList = new CheckoutStrategy[]{new NormalCheckout(), new LostCheckout(), new EventCheckout()};
+        CheckoutStrategy[] checkoutStyleList = new CheckoutStrategy[]{checkoutFactory.getCheckoutType("Normal"), checkoutFactory.getCheckoutType("Lost"), checkoutFactory.getCheckoutType("Event")}; //Where the factory is used, so usefully
 
         while (!garageClosed){
 
