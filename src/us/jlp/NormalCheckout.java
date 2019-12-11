@@ -18,6 +18,7 @@ public class NormalCheckout implements CheckoutStrategy {
             thisCost += (ticket.getDifference(outTime)) - 3; //Subtract the free 3 hours when calculating cost
         }
         garage.addNormalTicket(thisCost);
+        System.out.println(" === COST IS GOING TO BE REPORTED AS "+thisCost+"===");
         return(thisCost);
     }
 

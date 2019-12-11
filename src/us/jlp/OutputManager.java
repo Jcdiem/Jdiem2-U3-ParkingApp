@@ -1,5 +1,7 @@
 package us.jlp;
 
+import java.time.LocalTime;
+
 public class OutputManager {
 
     //Print parking screen
@@ -80,26 +82,15 @@ public class OutputManager {
     /**
      * Print out the receipt for a normal ticket
      *
-     * @param inTimeH The time the vehicle entered
-     * @param outTimeH The time the vehicle left
+     * @param inTime The time the vehicle entered
+     * @param outTime The time the vehicle left
      * @param id ID of the vehicle's ticket
      * @param cost Cost of the vehicles stay
      */
-    public void normalReceipt(int inTimeH, int outTimeH, int id, int cost){
-        int timeDif = outTimeH - inTimeH;
-        String inTimeHS;
-        String outTimeHS;
-        if (inTimeH > 12){ //check if incoming time is pm
-            inTimeH -= 12;
-            inTimeHS = inTimeH+"pm";
-        }
-        else inTimeHS = (inTimeH)+"am";
-        if(outTimeH > 12){ //Check if outgoing time is pm
-            outTimeH -= 12;
-            outTimeHS = outTimeH+"pm";
-        }
-        else outTimeHS = (outTimeH)+"am";
-        String sOutput = inTimeHS+" - "+outTimeHS;
+    public void normalReceipt(LocalTime inTime, LocalTime outTime, int id, int cost){
+        TimeHelper timeHelper = new TimeHelper();
+        int timeDif = outTime.getHour() - inTime.getHour();
+        String sOutput = timeHelper.timeToString(inTime)+" - "+timeHelper.timeToString(outTime);
 
         //Pretty text out
         System.out.println("Best value parking garage");
