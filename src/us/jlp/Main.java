@@ -20,7 +20,7 @@ public class Main {
         String input;
         int cID = 0;
         CarTicket curTicket = null;
-        CheckoutStrategy[] checkoutStyleList = new CheckoutStrategy[]{checkoutFactory.getCheckoutType("Normal"), checkoutFactory.getCheckoutType("Lost"), checkoutFactory.getCheckoutType("Event")}; //Where the factory is used, so usefully
+        CheckoutStrategy[] checkoutStyleList = new CheckoutStrategy[]{checkoutFactory.createCheckout("Normal"), checkoutFactory.createCheckout("Lost"), checkoutFactory.createCheckout("Event")}; //Where the factory is used, so usefully
 
         while (!garageClosed){
 

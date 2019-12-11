@@ -89,12 +89,12 @@ public class OutputManager {
         int timeDif = outTimeH - inTimeH;
         String inTimeHS;
         String outTimeHS;
-        if (inTimeH > 12){ //check if it is pm
+        if (inTimeH > 12){ //check if incoming time is pm
             inTimeH -= 12;
             inTimeHS = inTimeH+"pm";
         }
         else inTimeHS = (inTimeH)+"am";
-        if(outTimeH > 12){ //Check if it is pm
+        if(outTimeH > 12){ //Check if outgoing time is pm
             outTimeH -= 12;
             outTimeHS = outTimeH+"pm";
         }
